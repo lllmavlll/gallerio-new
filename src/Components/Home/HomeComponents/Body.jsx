@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
+import { UserAuth } from '../../../auth/JWTAuthContext'
 
 const Body = () => {
 
+  const { startUpload } = UserAuth()
   const [file, setFile] = useState(null)
+
 
   const handleUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -14,7 +17,7 @@ const Body = () => {
   const uploadImage = (e) => {
     e.preventDefault()
     if (file) {
-      console.log(file);
+      startUpload(file)
     }
     setFile(null)
   }
