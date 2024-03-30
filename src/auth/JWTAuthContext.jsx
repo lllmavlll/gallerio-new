@@ -7,13 +7,12 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase/config";
-import { Spinner } from "react-bootstrap";
 
 const UserContext = createContext();
 
 export const AUthContextProvider = ({ children }) => {
   const [isloading, setIsLoading] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
   //signup
   const createUser = (email, password) => {
