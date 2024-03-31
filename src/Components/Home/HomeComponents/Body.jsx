@@ -4,6 +4,7 @@ import ImageGallery from './ImageGallery'
 import UploadImage from './UploadImage'
 import { UserAuth } from '../../../auth/JWTAuthContext'
 import { toast } from 'sonner'
+import Hero from './Hero'
 
 const Body = () => {
   const { user } = UserAuth()
@@ -15,6 +16,7 @@ const Body = () => {
 
   return (
     <div className='min-vh-100'>
+      <Hero />
       {user ?
 
         <UploadImage />
@@ -26,6 +28,7 @@ const Body = () => {
           </div>
         </>
       }
+
       <ImageGallery />
 
     </div>
