@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { UserAuth } from '../../../auth/JWTAuthContext'
+import ImageGallery from './ImageGallery'
 
 const Body = () => {
 
@@ -27,6 +28,7 @@ const Body = () => {
         <input onChange={handleUpload} type='file' />
         <Button type='submit' variant='outline-primary'>upload</Button>
       </form>
+      <ImageGallery />
     </div>
   )
 }
