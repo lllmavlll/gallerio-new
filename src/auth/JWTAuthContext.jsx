@@ -11,6 +11,7 @@ import { auth, db, storage } from "../firebase/config";
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { v4 as uuidv4 } from 'uuid'
 import { addDoc, collection } from "firebase/firestore";
+import { Spinner } from "react-bootstrap";
 
 const UserContext = createContext();
 
@@ -46,7 +47,6 @@ export const AUthContextProvider = ({ children }) => {
     if (!file) {
       return;
     }
-    console.log(file);
 
     const fileId = uuidv4()
     const fileType = file.type.split('/')[1]
@@ -67,11 +67,11 @@ export const AUthContextProvider = ({ children }) => {
 
         // store data into firestore
 
-        // await addDoc(collection(db, "images"), {
-        //   imageUrl: downloadURL,
-        //   createdAt: new Date(),
-        //   userEmail: user?.email
-        // });
+        await addDoc(collection(db, "images"), {
+          imageUrl: downloadURL,
+          createdAt: new Date(),
+          userEmail: user.email
+        });
       }
     );
   }
@@ -107,9 +107,10 @@ export const AUthContextProvider = ({ children }) => {
       {isloading ? (
         children
       ) : (
-        <div className="d-flex justify-content-between">
-          {/* <Spinner animation="border" variant="primary" /> */}
-          <div>Loadingggg...</div>
+        <div className="d-flex justify-center align-item-center vh-100">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
         </div>
       )}
     </UserContext.Provider>

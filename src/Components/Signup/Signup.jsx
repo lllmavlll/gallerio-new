@@ -25,7 +25,6 @@ const Signup = () => {
       ...inputValue,
       [name]: value
     })
-    console.log(inputValue);
   }
 
   const loginUser = async (e) => {

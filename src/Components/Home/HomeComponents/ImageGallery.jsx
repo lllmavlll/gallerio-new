@@ -56,23 +56,23 @@ const ImageGallery = () => {
 
 
   return (
-    <div className='grid md:grid-cols-3 justify-center gap-4 mt-10'>
-      {imageData && imageData.map((data) => (
-        <>
-          <div
-            key={data.imageUrl}
-            className='card card-compact w-full bg-base-100  shadow-xl'
-          >
-            <figure>
-              <img src={data.imageUrl} alt='pics' />
-            </figure>
-            <div className='card-body'>
-              <p>uploaded by:{data.userEmail}</p>
-              <span >Posted on :{data.createdAt.toLocaleString()}</span>
-            </div>
-
+    <div className='grid md:grid-cols-3 justify-center gap-3 mt-10'>
+      {imageData && imageData.map(data => (
+        <div
+          key={data.imageUrl}
+          className='card card-compact w-full bg-base-100 shadow-xl border-radius-20'
+        >
+          <figure>
+            <img src={data.imageUrl} alt='pics' />
+          </figure>
+          <div className='card-body'>
+            <p>uploaded by:
+              <span className='text-primary ml-1'>{data.userEmail}</span>
+            </p>
+            <span className='text-muted' >Posted on :{data.createdAt.toLocaleString()}</span>
           </div>
-        </>
+
+        </div>
       ))}
     </div>
   )

@@ -7,6 +7,7 @@ const Footer = () => {
       <Container>
         <hr className="my-4" />
         <p className="text-center">&copy; {new Date().getFullYear()} GalleRio. All rights reserved.</p>
+        <p className='text-center'>Crteated By Mahesh KN <a className='font-size-large' href='https://www.linkedin.com/in/mahesh-k-n-732121251/' target='_blank'><i className="fa-brands fa-linkedin"></i></a></p>
       </Container>
     </footer>
   );
