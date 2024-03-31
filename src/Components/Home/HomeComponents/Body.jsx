@@ -5,6 +5,8 @@ import ImageGallery from './ImageGallery'
 
 const Body = () => {
 
+  const { user } = UserAuth()
+
   const { startUpload } = UserAuth()
   const [file, setFile] = useState(null)
 
@@ -29,6 +31,7 @@ const Body = () => {
         <Button type='submit' variant='outline-primary'>upload</Button>
       </form>
       <ImageGallery />
+
     </div>
   )
 }

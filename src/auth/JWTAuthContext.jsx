@@ -49,9 +49,10 @@ export const AUthContextProvider = ({ children }) => {
     console.log(file);
 
     const fileId = uuidv4()
-    const storageRef = ref(storage, `images/${fileId}.jpeg`);
-
+    const fileType = file.type.split('/')[1]
+    const storageRef = ref(storage, `images/${fileId}.${fileType}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
+
     uploadTask.on('state_changed',
       (snapshot) => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -64,14 +65,13 @@ export const AUthContextProvider = ({ children }) => {
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref)
         setProgress(progress)
 
-        //store data into firestore
+        // store data into firestore
 
-        await addDoc(collection(db, "images"), {
-          imageUrl: downloadURL,
-          createdAt: new Date(),
-          // userEmail: user?.email
-          userEmail: "mahesh@gmail.com"
-        });
+        // await addDoc(collection(db, "images"), {
+        //   imageUrl: downloadURL,
+        //   createdAt: new Date(),
+        //   userEmail: user?.email
+        // });
       }
     );
   }

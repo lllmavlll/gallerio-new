@@ -1,9 +1,13 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
+import { Card, Row, Col, Image } from 'react-bootstrap';
 import { db } from '../../../firebase/config'
 import { Spinner } from 'react-bootstrap'
+import { UserAuth } from '../../../auth/JWTAuthContext'
 
 const ImageGallery = () => {
+
+  const { user } = UserAuth()
 
   const [imageData, setImageData] = useState([])
   const [isLoading, setIsLoadind] = useState(true)
@@ -24,7 +28,7 @@ const ImageGallery = () => {
             images.push({ imageUrl, userEmail, createdAt })
           });
           setImageData(images)
-          console.log(imageData)
+          console.log(images)
           setIsLoadind(false)
         });
       } catch (error) {
@@ -47,14 +51,27 @@ const ImageGallery = () => {
         </Spinner>
       </>
     )
+
   }
 
+
   return (
-    <div>
-      {imageData && imageData.map((data, index, key) => (
+    <div className='grid md:grid-cols-3 justify-center gap-4 mt-10'>
+      {imageData && imageData.map((data) => (
         <>
-          <img src={`${data.imageUrl}`} alt="" />
-          <p>{data.userEmail}</p>
+          <div
+            key={data.imageUrl}
+            className='card card-compact w-full bg-base-100  shadow-xl'
+          >
+            <figure>
+              <img src={data.imageUrl} alt='pics' />
+            </figure>
+            <div className='card-body'>
+              <p>uploaded by:{data.userEmail}</p>
+              <span >Posted on :{data.createdAt.toLocaleString()}</span>
+            </div>
+
+          </div>
         </>
       ))}
     </div>
